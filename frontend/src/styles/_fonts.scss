@@ -1,0 +1,22 @@
+$path: './fonts';
+
+@font-face {
+    font-family: "Roboto-Medium";
+    src: url("#{$path}/Roboto-Medium.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Roboto-Thin";
+    src: url("#{$path}/Roboto-Thin.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Roboto-Regular";
+    src: url("#{$path}/Roboto-Regular.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Roboto-Bold";
+    src: url("#{$path}/Roboto-Bold.ttf") format("truetype");
+}
+@font-face {
+    font-family: "AvenirNextCyr-Light";
+    src: url("#{$path}/Roboto-Light.ttf") format("truetype");
+}

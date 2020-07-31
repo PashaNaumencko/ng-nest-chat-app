@@ -1,0 +1,41 @@
+@mixin desktop-large() {
+  @media screen and (min-width: 2000px) {
+      @content
+  }
+}
+
+@mixin desktop() {
+  @media only screen and (min-width: 1200px) and (max-width: 1601px) and (min-height: 1000px) {
+    @content
+  }
+}
+
+@mixin laptop() {
+  @media only screen and (min-width: 768px) and (max-width: 1599px) and (max-height: 780px) {
+    @content
+  }
+}
+
+@mixin tablets() {
+  @media screen and (max-width: 1025px) {
+    @content
+  }
+}
+
+@mixin tablets-min() {
+  @media screen and (max-width: 992px) {
+      @content
+  }
+}
+
+@mixin phones() {
+  @media screen and (max-width: 768px) {
+    @content
+  }
+}
+
+@mixin phones-min() {
+  @media screen and (max-width: 480px) {
+      @content
+  }
+}
