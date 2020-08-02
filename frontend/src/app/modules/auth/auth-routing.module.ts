@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router'
-import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
@@ -26,14 +25,9 @@ const authRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    LoginComponent,
-    RegistrationComponent,
-    ResetPasswordComponent
-  ],
   imports: [
-    CommonModule,
     RouterModule.forChild(authRoutes)
-  ]
+  ],
+  exports: [RouterModule]
 })
-export class AuthModule { }
+export class AuthRoutingModule { }

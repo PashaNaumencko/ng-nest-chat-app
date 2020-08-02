@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ChatListComponent } from './components/chat-list/chat-list.component'
-import { CommonModule } from '@angular/common';
 
 const homeRoutes: Routes = [
   {
@@ -11,10 +10,9 @@ const homeRoutes: Routes = [
 ]
 
 @NgModule({
-  declarations: [ChatListComponent],
   imports: [
-    CommonModule,
     RouterModule.forChild(homeRoutes)
-  ]
+  ],
+  exports: [RouterModule]
 })
-export class HomeModule { }
+export class HomeRoutingModule { }
