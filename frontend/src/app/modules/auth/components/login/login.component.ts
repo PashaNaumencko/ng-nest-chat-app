@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faCommentDots } from '@fortawesome/free-solid-svg-icons';
+import { faCommentDots, faUser, faCheckCircle, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +9,9 @@ import { faCommentDots } from '@fortawesome/free-solid-svg-icons';
 export class LoginComponent implements OnInit {
 
   faCommentDots = faCommentDots;
+  faUser = faUser;
+  faCheckCircle = faCheckCircle;
+  faExclamationCircle = faExclamationCircle;
 
   constructor() { }
 

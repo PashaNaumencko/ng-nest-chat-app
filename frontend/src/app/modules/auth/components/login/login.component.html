@@ -1,6 +1,56 @@
 <div class="page-wrapper">
   <div class="container">
-    <fa-icon [icon]="faCommentDots"></fa-icon>
-    <h3>Sign in</h3>
+    <div class="login">
+      <fa-icon [icon]="faCommentDots" class="login__icon"></fa-icon>
+      <h3>Sign in</h3>
+      <div class="login__subheader">Welcome to ChatApp! Please login to your account.</div>
+      <div class="field">
+        <label class="field__label">
+          Username
+          <span>*</span>
+        </label>
+        <div class="field__input-wr">
+          <input type="text"
+            class="
+            field__input
+            field__input--border
+            field__input--error"
+          >
+          <fa-icon [icon]="faExclamationCircle" class="field__icon field__icon--error"></fa-icon>
+        </div>
+        <div class="field__error-text">Required</div>
+      </div>
+      <div class="field">
+        <label class="field__label">
+          Password
+          <span>*</span>
+        </label>
+        <div class="field__input-wr">
+          <input type="password"
+            class="
+            field__input
+            field__input--border
+            field__input--success"
+          >
+          <fa-icon [icon]="faCheckCircle" class="field__icon field__icon--success"></fa-icon>
+        </div>
+      </div>
+      <div class="space-between mb-20">
+        <label class="check">
+          <input type="checkbox" class="visually-hidden" tabindex="0">
+          <div class="check__box"></div>
+          Remember me
+        </label>
+        <a class="login__reset-link" routerLink="/auth/reset-password">Forgot password</a>
+      </div>
+      <button type="submit" class="btn btn--primary btn--full-width mb-20">
+        <fa-icon [icon]="faUser" class="btn__icon"></fa-icon>
+        Login
+      </button>
+      <div class="login__signup-link">
+        Don't have an account yet?
+        <a routerLink="/auth/register">Signup Now</a>
+      </div>
+    </div>
   </div>
 </div>
