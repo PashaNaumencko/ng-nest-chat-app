@@ -10,7 +10,7 @@ export class User extends AbstractEntity {
   username: string;
 
   @Column({ nullable: false })
-  passwordHash?: string;
+  password: string;
 
   @Column({
     unique: true,
