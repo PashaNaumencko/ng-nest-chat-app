@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { UserService } from '../../user/services/user.service';
 import { IAuthResponse } from '../interfaces/IAuthResponse';
 import { JwtService } from '@nestjs/jwt';
-import { ICreateUser } from '../../user/interfaces/ICreateUser';
+import { CreateUserDto } from '../../user/dto/CreateUserDto';
 
 @Injectable()
 export class AuthService {
@@ -18,7 +18,7 @@ export class AuthService {
     return { token, user }
   }
 
-  async register(data: ICreateUser): Promise<IAuthResponse> {
+  async register(data: CreateUserDto): Promise<IAuthResponse> {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password, ...user } = await this.userService.addUser(data);
 

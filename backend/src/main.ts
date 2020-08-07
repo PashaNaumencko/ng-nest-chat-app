@@ -1,4 +1,5 @@
 import { NestFactory } from '@nestjs/core';
+import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './modules/app.module';
 
 async function bootstrap() {
@@ -7,6 +8,8 @@ async function bootstrap() {
   // Add a route prefix
   app.setGlobalPrefix('api');
   app.enableCors();
+
+  app.useGlobalPipes(new ValidationPipe());
 
   await app.listen(3000);
 }

@@ -3,7 +3,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { Request } from 'express'
 import { UserService } from '../../user/services/user.service';
-import { ICreateUser } from '../../user/interfaces/ICreateUser';
+import { CreateUserDto } from '../../user/dto/CreateUserDto';
 
 @Injectable()
 export class RegisterStrategy extends PassportStrategy(Strategy, 'register') {
@@ -15,7 +15,7 @@ export class RegisterStrategy extends PassportStrategy(Strategy, 'register') {
     });
   }
 
-  async validate({ body: { email } }: Request, username: string, password: string): Promise<ICreateUser> {
+  async validate({ body: { email } }: Request, username: string, password: string): Promise<CreateUserDto> {
     const userByUsername = await this.userService.getByUsername(username);
     if (userByUsername) {
       throw new UnauthorizedException('Username is already taken');
