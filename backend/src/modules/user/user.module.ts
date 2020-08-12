@@ -4,11 +4,13 @@ import { UserRepository } from './db/repositories/user.repository';
 import { UserService } from './services/user.service';
 import { PassportModule } from '@nestjs/passport';
 import { UserController } from './controllers/user.controller';
+import { SharedModule } from '../shared/shared.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([UserRepository]),
-    PassportModule
+    PassportModule,
+    SharedModule
   ],
   controllers: [UserController],
   providers: [UserService],

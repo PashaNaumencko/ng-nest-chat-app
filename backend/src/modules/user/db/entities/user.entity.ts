@@ -1,5 +1,6 @@
-import { Entity, Column } from 'typeorm';
-import { AbstractEntity } from '../../../common/abstract/abstract.entity';
+import { Entity, Column, OneToMany } from 'typeorm';
+import { AbstractEntity } from '../../../shared/abstract/abstract.entity';
+import { RefreshToken } from '../../../auth/db/entities/refresh-token.entity';
 
 @Entity()
 export class User extends AbstractEntity {
@@ -22,4 +23,7 @@ export class User extends AbstractEntity {
     nullable: true
   })
   description: string;
+
+  @OneToMany(() => RefreshToken, refreshToken => refreshToken.user)
+  refreshTokens: RefreshToken[];
 }

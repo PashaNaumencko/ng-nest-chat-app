@@ -2,12 +2,15 @@ import { Injectable } from '@nestjs/common';
 import { UserRepository } from '../db/repositories/user.repository';
 import { User } from '../db/entities/user.entity';
 import { IUserResponse } from '../interfaces/IUserResponse';
-import { hash } from 'bcrypt';
+import { CryptoHelper } from '../../shared/helpers/crypto.helper';
 import { CreateUserDto } from '../dto/CreateUserDto';
 
 @Injectable()
 export class UserService {
-  constructor(private userRepository: UserRepository) {}
+  constructor(
+    private userRepository: UserRepository,
+    private cryptoHelper: CryptoHelper
+  ) {}
 
   async getById(id: string): Promise<IUserResponse> {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -26,7 +29,7 @@ export class UserService {
   async addUser({ password, ...user }: CreateUserDto): Promise<User> {
     return this.userRepository.addUser({
       ...user,
-      password: await hash(password, 10)
+      password: await this.cryptoHelper.hash(password)
     });
   }
 }

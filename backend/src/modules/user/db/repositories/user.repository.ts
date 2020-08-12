@@ -4,6 +4,10 @@ import { CreateUserDto } from '../../dto/CreateUserDto';
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
+  getById(id: string): Promise<User> {
+    return this.findOne({ id });
+  }
+
   getByEmail(email: string): Promise<User> {
     return this.findOne({ email });
   }

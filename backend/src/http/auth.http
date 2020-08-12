@@ -9,6 +9,24 @@ Content-Type: application/json
 
 ###
 
+POST http://localhost:3000/api/auth/tokens HTTP/1.1
+Content-Type: application/json
+
+{
+  "refreshToken": "3a551d9aec5d8d9530a0871a4bf7b180.1255f956c0337d44fc7ef0b3409fac8ed19e77b10b93b946bd1108985d3ec574c99f344d3dabdf7145f552d6ab3faeec4869d1fdd711b85432372d28019f0b87e35ae65e36551c6c9a58183cbce6d657"
+}
+
+###
+
+POST http://localhost:3000/api/auth/tokens/revoke HTTP/1.1
+Content-Type: application/json
+
+{
+  "refreshToken": "U2FsdGVkX1+E1bwpUofoZKTfylUoplcDYzOKa325Z7Gt2ClRyLzEamsySxvbEyFOWu0P5KbvZy4In2u/oLiWJw=="
+}
+
+###
+
 POST http://localhost:3000/api/auth/register HTTP/1.1
 Content-Type: application/json
 
@@ -22,4 +40,4 @@ Content-Type: application/json
 
 GET  http://localhost:3000/api/user/profile HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMxZTFmNWNjLWRkMzQtNDNkNi05MDU4LWE3ZjE4NWMxNDFjZiIsImlhdCI6MTU5NjgwNDk2MywiZXhwIjoxNTk2ODA1ODYzfQ.Ff4MXx-mvAQ_8LhEcyllrjByy_EoDHbeA_XZvYP_Tnk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMxZTFmNWNjLWRkMzQtNDNkNi05MDU4LWE3ZjE4NWMxNDFjZiIsImlhdCI6MTU5NzA5MzIzMiwiZXhwIjoxNTk3MDkzMjkyfQ.p0-3DgUg7-TSzSnOlmM-bMZ1Ey_-TVzIs33FiAgd4Mw

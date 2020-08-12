@@ -1,7 +1,6 @@
 import { IUserResponse } from "../../user/interfaces/IUserResponse";
 
-export interface IAuthResponse {
+export interface ICreateToken {
+  expiresAt: number;
   user: IUserResponse;
-  accessToken: string;
-  refreshToken: string;
 }
