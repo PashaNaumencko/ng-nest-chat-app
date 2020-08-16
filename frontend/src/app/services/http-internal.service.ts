@@ -10,31 +10,44 @@ export class HttpInternalService {
 
   public apiURL = environment.apiUrl;
   private headers = new HttpHeaders();
+  private params = new HttpParams();
 
   constructor(private httpService: HttpClient) { }
 
-  public getHeaders() {
+  public getHeaders(): HttpHeaders {
     return this.headers;
   }
 
-  public getHeader(key: string) {
+  public getHeader(key: string): string {
     return this.headers.get(key);
   }
 
-  public setHeader(key: string, value: string) {
+  public setHeader(key: string, value: string): HttpHeaders {
     return this.headers.set(key, value);
   }
 
-  public get<T>(endpoint: string, httpParams?: HttpParams): Observable<T> {
+  public getParams(): HttpParams {
+    return this.params;
+  }
+
+  public getParam(key: string): string {
+    return this.params.get(key);
+  }
+
+  public setParam(key: string, value: string): HttpParams {
+    return this.params.set(key, value);
+  }
+
+  public get<T>(endpoint: string): Observable<T> {
     return this.httpService.get<T>(`${this.apiURL}/api/${endpoint}`, {
-      params: httpParams,
+      params: this.params,
       headers: this.headers
     });
   }
 
-  public getFullResponse<T>(endpoint: string, httpParams?: HttpParams): Observable<HttpResponse<T>> {
+  public getFullResponse<T>(endpoint: string): Observable<HttpResponse<T>> {
     return this.httpService.get<T>(`${this.apiURL}/api/${endpoint}`, {
-      params: httpParams,
+      params: this.params,
       headers: this.headers,
       observe: 'response'
     });
@@ -68,14 +81,14 @@ export class HttpInternalService {
 
   public delete<T>(endpoint: string, httpParams?: HttpParams): Observable<T>  {
     return this.httpService.delete<T>(`${this.apiURL}/api/${endpoint}`, {
-      params: httpParams,
+      params: this.params,
       headers: this.headers
     });
   }
 
-  public deleteFullResponse<T>(endpoint: string, httpParams?: HttpParams): Observable<HttpResponse<T>>  {
+  public deleteFullResponse<T>(endpoint: string): Observable<HttpResponse<T>>  {
     return this.httpService.delete<T>(`${this.apiURL}/api/${endpoint}`, {
-      params: httpParams,
+      params: this.params,
       headers: this.headers,
       observe: 'response'
     });

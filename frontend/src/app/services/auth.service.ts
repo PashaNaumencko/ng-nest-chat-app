@@ -4,10 +4,10 @@ import { TokenService } from './token.service';
 import { UserDTO } from '../modules/auth/models/UserDTO';
 import { IAuthResponse } from '../modules/auth/models/IAuthResponse';
 import { CredentialsDTO } from '../modules/auth/models/CredentialsDTO';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { HttpResponse } from '@angular/common/http';
-
+import { EventService } from './event.service';
+import { UserService } from './user.service';
 
 @Injectable()
 export class AuthService {
@@ -16,8 +16,26 @@ export class AuthService {
 
   constructor(
     private httpService: HttpInternalService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private eventService: EventService,
+    private userService: UserService
   ) { }
+
+  public getUser() {
+    return this.user
+      ? of(this.user)
+      : this.userService.getUserFromToken().pipe(
+        map((response) => {
+          this.setUser(response);
+          return response;
+        })
+      );
+  }
+
+  public setUser(user: UserDTO) {
+    this.user = user;
+    this.eventService.changeUser(this.user);
+  }
 
   public login(credentials: CredentialsDTO): Observable<IAuthResponse> {
     return this.subscribeAuthResponse(this.httpService.post<IAuthResponse>(`${this.apiPrefix}/login`, credentials));
@@ -27,16 +45,16 @@ export class AuthService {
     return this.subscribeAuthResponse(this.httpService.post<IAuthResponse>(`${this.apiPrefix}/register`, user));
   }
 
-  private subscribeAuthResponse(response: Observable<HttpResponse<IAuthResponse>>) {
+  private subscribeAuthResponse(response: Observable<IAuthResponse>) {
     return response.pipe(
       map((response) => {
         this.tokenService.setTokens({
-          accessToken: response.body.accessToken,
-          refreshToken: response.body.refreshToken
+          accessToken: response.accessToken,
+          refreshToken: response.refreshToken
         });
-        this.user = response.body.user;
-        // this.eventService.userChanged(resp.body.user);
-        return response.body;
+        this.user = response.user;
+        this.eventService.changeUser(response.user);
+        return response;
       })
     );
   }
