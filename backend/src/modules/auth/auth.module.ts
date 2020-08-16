@@ -10,7 +10,7 @@ import { AuthController } from './controllers/auth.controller'
 import { AuthService } from './services/auth.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RefreshTokenRepository } from './db/repositories/refresh-token.repository';
-import { RefreshTokenService } from './services/refresh-token.service';
+import { TokenService } from './services/token.service';
 import { SharedModule } from '../shared/shared.module';
 @Module({
   imports: [
@@ -29,7 +29,7 @@ import { SharedModule } from '../shared/shared.module';
       inject: [ConfigService]
     })
   ],
-  providers: [LoginStrategy, RegisterStrategy, JwtStrategy, AuthService, RefreshTokenService],
+  providers: [LoginStrategy, RegisterStrategy, JwtStrategy, AuthService, TokenService],
   controllers: [AuthController]
 })
 export class AuthModule {}

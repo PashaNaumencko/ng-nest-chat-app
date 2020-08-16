@@ -1,15 +1,11 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { RefreshToken } from '../entities/refresh-token.entity';
 import { ICreateToken } from '../../interfaces/ICreateToken';
-import { IRefreshTokenWithUser } from '../../interfaces/IRefreshTokenWithUser';
 
 @EntityRepository(RefreshToken)
 export class RefreshTokenRepository extends Repository<RefreshToken> {
-  getById(id: string): Promise<IRefreshTokenWithUser> {
-    return this.findOne({
-      where: { id },
-      relations: ['user']
-    });
+  getById(id: string): Promise<RefreshToken> {
+    return this.findOne({ id });
   }
 
   addToken(payload: ICreateToken): Promise<RefreshToken> {

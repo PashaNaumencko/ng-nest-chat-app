@@ -1,3 +1,7 @@
+import { IUserResponse } from "../../user/interfaces/IUserResponse";
+
 export interface IAuth {
-  id: string;
+  user?: IUserResponse
+  accessToken: string;
+  refreshToken: string;
 }

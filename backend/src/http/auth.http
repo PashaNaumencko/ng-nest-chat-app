@@ -13,16 +13,15 @@ POST http://localhost:3000/api/auth/tokens HTTP/1.1
 Content-Type: application/json
 
 {
-  "refreshToken": "3a551d9aec5d8d9530a0871a4bf7b180.1255f956c0337d44fc7ef0b3409fac8ed19e77b10b93b946bd1108985d3ec574c99f344d3dabdf7145f552d6ab3faeec4869d1fdd711b85432372d28019f0b87e35ae65e36551c6c9a58183cbce6d657"
+  "refreshToken": "6e8e66b57b095fd63d8461831237d842.fbd3390131d18bc92ce42514406bccf3106c16bf70ed04a8cbd70710eacf2273f9b35f5013c0b9ab7049a76ea2f16e42fc4b9465d9b98326f115017078db614e08254eaaf0acf8905d8c769125fe9b79"
 }
-
 ###
 
 POST http://localhost:3000/api/auth/tokens/revoke HTTP/1.1
 Content-Type: application/json
 
 {
-  "refreshToken": "U2FsdGVkX1+E1bwpUofoZKTfylUoplcDYzOKa325Z7Gt2ClRyLzEamsySxvbEyFOWu0P5KbvZy4In2u/oLiWJw=="
+  "refreshToken": "2164775cf5b8c522dfec2cbae79fdc04.7630ce1089aa81d95e3eb7809d92e6bdfd24edb7fdcc9c74fc3cfb5a45f0df1acb377fc53d2503e533108e6990eadc811150074896e1e7275297b9a61761fb2e9fbd400bf6c0b2f09cdb535eaedb552c"
 }
 
 ###
@@ -40,4 +39,10 @@ Content-Type: application/json
 
 GET  http://localhost:3000/api/user/profile HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMxZTFmNWNjLWRkMzQtNDNkNi05MDU4LWE3ZjE4NWMxNDFjZiIsImlhdCI6MTU5NzA5MzIzMiwiZXhwIjoxNTk3MDkzMjkyfQ.p0-3DgUg7-TSzSnOlmM-bMZ1Ey_-TVzIs33FiAgd4Mw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMxZTFmNWNjLWRkMzQtNDNkNi05MDU4LWE3ZjE4NWMxNDFjZiIsImlhdCI6MTU5NzQ0MzU1NywiZXhwIjoxNTk3NDQzNjc3fQ.WdLZzYs9Rm3tqmBk-nSUiP9kwDbTZwRA1oeNYqMCABA
+
+###
+
+GET  http://localhost:3000/api/user/current HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMxZTFmNWNjLWRkMzQtNDNkNi05MDU4LWE3ZjE4NWMxNDFjZiIsImlhdCI6MTU5NzQ0MzU1NywiZXhwIjoxNTk3NDQzNjc3fQ.WdLZzYs9Rm3tqmBk-nSUiP9kwDbTZwRA1oeNYqMCABA

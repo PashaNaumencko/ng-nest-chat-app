@@ -3,7 +3,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { ITokenPayload } from '../interfaces/ITokenPayload';
-import { IAuth } from '../interfaces/IAuth';
+import { IPayload } from '../interfaces/IPayload';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -15,7 +15,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  validate(payload: ITokenPayload): IAuth {
+  validate(payload: ITokenPayload): IPayload {
     return { id: payload.id };
   }
 }

@@ -1,49 +1,41 @@
 import { Injectable } from '@nestjs/common';
 import { UserService } from '../../user/services/user.service';
-import { IAuthResponse } from '../interfaces/IAuthResponse';
-import { JwtService } from '@nestjs/jwt';
+import { IAuth } from '../interfaces/IAuth';
 import { CreateUserDto } from '../../user/dto/CreateUserDto';
-import { RefreshTokenService } from './refresh-token.service';
+import { TokenService } from './token.service';
 import { IRefreshToken } from '../interfaces/IRefreshToken';
-
+import { IUserResponse } from 'src/modules/user/interfaces/IUserResponse';
 @Injectable()
 export class AuthService {
   constructor(
     private userService: UserService,
-    private jwtService: JwtService,
-    private refreshTokenService: RefreshTokenService
+    private tokenService: TokenService
   ) {}
 
+  async login(user: IUserResponse): Promise<IAuth> {
+    const tokens = await this.tokenService.generateTokens(user);
 
-  async login(id: string): Promise<IAuthResponse> {
-    const user = await this.userService.getById(id);
-    const accessToken = await this.jwtService.signAsync({ id });
-    const refreshToken = await this.refreshTokenService.generateRefreshToken(user);
-
-    return {
-      user,
-      accessToken,
-      refreshToken
-    };
+    return { ...tokens, user };
   }
 
-  async register(data: CreateUserDto): Promise<IAuthResponse> {
+  async register(data: CreateUserDto): Promise<IAuth> {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password, ...user } = await this.userService.addUser(data);
 
-    return this.login(user.id)
+    return this.login(user);
   }
 
+  async refreshTokens(encryptedRefreshToken: string): Promise<IAuth> {
+    const refreshToken = await this.tokenService.validateRefreshToken(encryptedRefreshToken);
+    const currentUser = await this.userService.getById(refreshToken.userId);
+    const tokens = await this.tokenService.generateTokens(currentUser);
 
-  async refreshTokens(refreshTokenId: string): Promise<IAuthResponse> {
-    const validToken = await this.refreshTokenService.validateRefreshToken(refreshTokenId);
-    await this.revokeToken(refreshTokenId);
-    return this.login(validToken.user.id);
+    return tokens;
   }
 
   async revokeToken(refreshTokenId: string): Promise<IRefreshToken> {
-    const validToken = await this.refreshTokenService.validateRefreshToken(refreshTokenId);
-    await this.refreshTokenService.deleteToken(validToken.id);
+    const validToken = await this.tokenService.validateRefreshToken(refreshTokenId);
+    await this.tokenService.deleteToken(validToken.id);
     return {
       refreshToken: refreshTokenId
     };

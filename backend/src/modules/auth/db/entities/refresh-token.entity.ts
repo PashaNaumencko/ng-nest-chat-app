@@ -1,4 +1,4 @@
-import { Entity, Column, ManyToOne } from 'typeorm';
+import { Entity, Column, ManyToOne, RelationId } from 'typeorm';
 import { AbstractEntity } from '../../../shared/abstract/abstract.entity';
 import { User } from '../../../user/db/entities/user.entity';
 
@@ -9,4 +9,7 @@ export class RefreshToken extends AbstractEntity {
 
   @ManyToOne(() => User, user => user.refreshTokens)
   user: User;
+
+  @RelationId((token: RefreshToken) => token.user)
+  readonly userId: string;
 }

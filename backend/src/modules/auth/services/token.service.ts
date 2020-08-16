@@ -3,17 +3,30 @@ import { RefreshTokenRepository } from '../db/repositories/refresh-token.reposit
 import { CryptoHelper } from '../../shared/helpers/crypto.helper';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { RefreshToken } from '../db/entities/refresh-token.entity';
+import { JwtService } from '@nestjs/jwt';
+import { IAuth } from '../interfaces/IAuth';
 
 @Injectable()
-export class RefreshTokenService {
+export class TokenService {
   constructor(
     private refreshTokenRepository: RefreshTokenRepository,
+    private jwtService: JwtService,
     private cryptoHelper: CryptoHelper
   ) {}
 
-  async generateRefreshToken(user: IUserResponse): Promise<string> {
+  async generateTokens(user: IUserResponse): Promise<IAuth> {
+    const accessToken = await this.jwtService.signAsync({ id: user.id });
+    const refreshToken = await this.generateRefreshToken(user);
+
+    return {
+      accessToken,
+      refreshToken
+    };
+  }
+
+  private async generateRefreshToken(user: IUserResponse): Promise<string> {
     const currentDate = new Date();
-    const expiresAt = currentDate.setDate(currentDate.getMinutes() + 3);
+    const expiresAt = currentDate.setDate(currentDate.getMinutes() + 1);
     const { id } = await this.refreshTokenRepository.addToken({
       user,
       expiresAt
@@ -35,6 +48,7 @@ export class RefreshTokenService {
       throw new UnauthorizedException('Expired refresh token');
     }
 
+    await this.deleteToken(token.id);
     return token;
   }
 
