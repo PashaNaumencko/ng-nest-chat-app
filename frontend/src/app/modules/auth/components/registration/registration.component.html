@@ -1,1 +1,152 @@
-<p>registration works!</p>
+<div class="page-wrapper">
+  <div class="container">
+    <form [formGroup]="registerForm" (ngSubmit)="onSignUp()" class="signup">
+      <fa-icon [icon]="faCommentDots" class="signup__icon"></fa-icon>
+      <h3>Sign in</h3>
+      <div class="signup__subheader">Welcome to ChatApp! Please create a new account.</div>
+        <div class="field">
+          <label class="field__label">
+            Username
+            <span>*</span>
+          </label>
+          <div class="field__input-wr">
+            <input
+              type="text"
+              class="
+              field__input
+              field__input--border"
+              formControlName="username"
+              [class.field__input--error]="registerForm.controls['username'].invalid && registerForm.controls['username'].touched"
+            >
+            <fa-icon
+              [icon]="faExclamationCircle"
+              class="field__icon field__icon--error"
+              *ngIf="registerForm.controls['username'].invalid && registerForm.controls['username'].touched"
+            ></fa-icon>
+            <fa-icon
+              [icon]="faCheckCircle"
+              class="field__icon field__icon--success"
+              *ngIf="registerForm.controls['username'].valid && registerForm.controls['username'].touched"
+            ></fa-icon>
+            </div>
+          <div
+            class="field__error-text"
+            *ngIf="registerForm.controls['username'].invalid && registerForm.controls['username'].touched"
+          >
+            <span *ngIf="registerForm.controls['username'].errors.required">Required</span>
+            <span *ngIf="registerForm.controls['username'].errors.minlength">Username value is too short</span>
+            <span *ngIf="registerForm.controls['username'].errors.maxlength">Username value is too long</span>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field__label">
+            Email
+            <span>*</span>
+          </label>
+          <div class="field__input-wr">
+            <input
+              type="text"
+              class="
+              field__input
+              field__input--border"
+              formControlName="email"
+              [disabled]="loading"
+              [class.field__input--error]="registerForm.controls['email'].invalid && registerForm.controls['email'].touched"
+            >
+            <fa-icon
+              [icon]="faExclamationCircle"
+              class="field__icon field__icon--error"
+              *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched"
+            ></fa-icon>
+            <fa-icon
+              [icon]="faCheckCircle"
+              class="field__icon field__icon--success"
+              *ngIf="registerForm.controls['email'].valid && registerForm.controls['email'].touched"
+            ></fa-icon>
+            </div>
+          <div
+            class="field__error-text"
+            *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched"
+          >
+            <span *ngIf="registerForm.controls['email'].errors.required">Required</span>
+            <span *ngIf="registerForm.controls['email'].errors.pattern">Incorrect email</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field__label">
+            Password
+            <span>*</span>
+          </label>
+          <div class="field__input-wr">
+            <input
+              type="password"
+              class="
+              field__input
+              field__input--border"
+              [class.field__input--error]="registerForm.controls['password'].invalid && registerForm.controls['password'].touched"
+              formControlName="password"
+            >
+            <fa-icon
+              [icon]="faExclamationCircle"
+              class="field__icon field__icon--error"
+              *ngIf="registerForm.controls['password'].invalid && registerForm.controls['password'].touched"
+            ></fa-icon>
+            <fa-icon
+              [icon]="faCheckCircle"
+              class="field__icon field__icon--success"
+              *ngIf="registerForm.controls['password'].valid && registerForm.controls['password'].touched"
+            ></fa-icon>
+          </div>
+          <div
+            class="field__error-text"
+            *ngIf="registerForm.controls['password'].invalid && registerForm.controls['password'].touched"
+          >
+            <span *ngIf="registerForm.controls['password'].errors.required">Required</span>
+            <span *ngIf="registerForm.controls['password'].errors.pattern">Password should contain at least 8 characters, one number and one letter</span>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field__label">
+            Confirm Password
+            <span>*</span>
+          </label>
+          <div class="field__input-wr">
+            <input
+              type="password"
+              class="
+              field__input
+              field__input--border"
+              [class.field__input--error]="registerForm.controls['passwordConfirm'].invalid && registerForm.controls['passwordConfirm'].touched"
+              formControlName="passwordConfirm"
+            >
+            <fa-icon
+              [icon]="faExclamationCircle"
+              class="field__icon field__icon--error"
+              *ngIf="registerForm.controls['passwordConfirm'].invalid && registerForm.controls['passwordConfirm'].touched"
+            ></fa-icon>
+            <fa-icon
+              [icon]="faCheckCircle"
+              class="field__icon field__icon--success"
+              *ngIf="registerForm.controls['passwordConfirm'].valid && registerForm.controls['passwordConfirm'].touched"
+            ></fa-icon>
+          </div>
+          <div
+            class="field__error-text"
+            *ngIf="registerForm.controls['passwordConfirm'].invalid && registerForm.controls['passwordConfirm'].touched"
+          >
+            <span *ngIf="registerForm.controls['passwordConfirm'].errors.required">Required</span>
+            <span *ngIf="registerForm.controls['passwordConfirm'].errors.mustMatch">Passwords don't match</span>
+          </div>
+        </div>
+        <button type="submit" class="btn btn--primary btn--full-width mb-20" [disabled]="!registerForm.valid || loading">
+          <fa-icon [icon]="faUser" class="btn__icon"></fa-icon>
+          Sign Up
+        </button>
+        <div class="signup__signup-link">
+          Already have an account?
+          <a routerLink="/auth/login">Signin Now</a>
+        </div>
+    </form>
+  </div>
+</div>

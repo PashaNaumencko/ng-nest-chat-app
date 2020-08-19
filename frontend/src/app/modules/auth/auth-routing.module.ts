@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { HomeGuard } from '../../guards/home.guard';
 
 const authRoutes: Routes = [
   {
@@ -12,11 +13,13 @@ const authRoutes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [HomeGuard]
   },
   {
     path: 'register',
-    component: RegistrationComponent
+    component: RegistrationComponent,
+    canActivate: [HomeGuard]
   },
   {
     path: 'reset-password',

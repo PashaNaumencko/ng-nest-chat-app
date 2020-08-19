@@ -6,7 +6,7 @@ import {
   HttpInterceptor,
   HttpErrorResponse
 } from '@angular/common/http';
-import { TokenService } from '../token.service';
+import { TokenService } from '../services/token.service';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { switchMap, filter, take, catchError, finalize } from 'rxjs/operators';
 
@@ -24,7 +24,10 @@ export class AuthInterceptor implements HttpInterceptor {
 
     return next.handle(request).pipe(
       catchError(error => {
-        if (error instanceof HttpErrorResponse && error.status === 401) {
+        if (error instanceof HttpErrorResponse
+          && error.status === 401
+          && error.message === 'Invalid refresh token'
+          || error.message === 'Expired refresh token') {
           return this.handle401Error(request, next);
         }
         return throwError(error);
@@ -45,7 +48,7 @@ export class AuthInterceptor implements HttpInterceptor {
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);
 
-      return this.tokenService.refreshTokens({ refreshToken: this.tokenService.getRefreshToken() }).pipe(
+      return this.tokenService.refreshTokens().pipe(
         switchMap((tokens) => {
           this.refreshTokenSubject.next(tokens.refreshToken);
           return next.handle(this.addToken(request, tokens.refreshToken));

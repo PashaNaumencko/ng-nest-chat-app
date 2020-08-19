@@ -8,8 +8,11 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EventService } from './event.service';
 import { UserService } from './user.service';
+import { Router } from '@angular/router';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
   public apiPrefix = 'auth';
   private user: UserDTO;
@@ -18,10 +21,11 @@ export class AuthService {
     private httpService: HttpInternalService,
     private tokenService: TokenService,
     private eventService: EventService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) { }
 
-  public getUser() {
+  public getUser(): Observable<UserDTO> {
     return this.user
       ? of(this.user)
       : this.userService.getUserFromToken().pipe(
@@ -32,7 +36,7 @@ export class AuthService {
       );
   }
 
-  public setUser(user: UserDTO) {
+  public setUser(user: UserDTO): void {
     this.user = user;
     this.eventService.changeUser(this.user);
   }
@@ -45,8 +49,8 @@ export class AuthService {
     return this.subscribeAuthResponse(this.httpService.post<IAuthResponse>(`${this.apiPrefix}/register`, user));
   }
 
-  private subscribeAuthResponse(response: Observable<IAuthResponse>) {
-    return response.pipe(
+  private subscribeAuthResponse(authResponse: Observable<IAuthResponse>): Observable<IAuthResponse> {
+    return authResponse.pipe(
       map((response) => {
         this.tokenService.setTokens({
           accessToken: response.accessToken,
@@ -54,6 +58,19 @@ export class AuthService {
         });
         this.user = response.user;
         this.eventService.changeUser(response.user);
+        return response;
+      })
+    );
+  }
+
+  public logout(): Observable<any> {
+    return this.tokenService.revokeRefreshToken().pipe(
+      map((response) => {
+        this.tokenService.removeTokens();
+        this.user = null;
+        this.eventService.changeUser(this.user);
+        this.router.navigateByUrl('/auth/login');
+
         return response;
       })
     );

@@ -5,12 +5,12 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  public routePrefix = 'users';
+  public routePrefix = 'user';
 
   constructor(private httpService: HttpInternalService) {}
 
   public getUserFromToken(): Observable<UserDTO> {
-    return this.httpService.get<UserDTO>(`/${this.routePrefix}/current`);
+    return this.httpService.get<UserDTO>(`${this.routePrefix}/current`);
   }
 
   public getUserById(id: string): Observable<UserDTO> {

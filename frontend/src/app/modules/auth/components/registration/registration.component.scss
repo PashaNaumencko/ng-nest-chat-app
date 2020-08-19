@@ -1,0 +1,37 @@
+@import "variables";
+
+.signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  &__icon {
+    color: $primary-green;
+    font-size: 2.4rem;
+    margin-bottom: 20px;
+  }
+  h3 {
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    letter-spacing: 0.25em;
+    margin-bottom: 20px;
+  }
+  &__subheader {
+    font-family: $light-font;
+    color: #585858d2;
+    margin-bottom: 20px;
+  }
+  &__reset-link {
+    font-size: 1rem;
+    font-family: $medium-font;
+    color: #f14848;
+  }
+  &__signup-link {
+    font-size: 0.9rem;
+    color: #585858d2;
+    a {
+      font-family: $medium-font;
+      font-size: 0.9rem;
+    }
+  }
+}
