@@ -1,1 +1,5 @@
-<p>chat-list works!</p>
+<p>{{ getUser() }}</p>
+<button class="btn btn--primary mb-20" (click)="onLogout()">
+  <fa-icon [icon]="faSignOutAlt" class="btn__icon"></fa-icon>
+  Logout
+</button>

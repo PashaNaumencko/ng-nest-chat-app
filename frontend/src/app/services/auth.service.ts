@@ -6,7 +6,6 @@ import { IAuthResponse } from '../modules/auth/models/IAuthResponse';
 import { CredentialsDTO } from '../modules/auth/models/CredentialsDTO';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { EventService } from './event.service';
 import { UserService } from './user.service';
 import { Router } from '@angular/router';
 
@@ -20,7 +19,6 @@ export class AuthService {
   constructor(
     private httpService: HttpInternalService,
     private tokenService: TokenService,
-    private eventService: EventService,
     private userService: UserService,
     private router: Router
   ) { }
@@ -38,7 +36,6 @@ export class AuthService {
 
   public setUser(user: UserDTO): void {
     this.user = user;
-    this.eventService.changeUser(this.user);
   }
 
   public login(credentials: CredentialsDTO): Observable<IAuthResponse> {
@@ -57,7 +54,6 @@ export class AuthService {
           refreshToken: response.refreshToken
         });
         this.user = response.user;
-        this.eventService.changeUser(response.user);
         return response;
       })
     );
@@ -66,10 +62,7 @@ export class AuthService {
   public logout(): Observable<any> {
     return this.tokenService.revokeRefreshToken().pipe(
       map((response) => {
-        this.tokenService.removeTokens();
         this.user = null;
-        this.eventService.changeUser(this.user);
-        this.router.navigateByUrl('/auth/login');
 
         return response;
       })

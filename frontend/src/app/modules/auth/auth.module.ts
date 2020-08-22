@@ -19,7 +19,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     AuthRoutingModule,
     SharedModule,
     ReactiveFormsModule
-  ],
-  providers: [AuthService]
+  ]
 })
 export class AuthModule { }

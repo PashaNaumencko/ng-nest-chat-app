@@ -3,8 +3,9 @@ import { UserService } from '../../user/services/user.service';
 import { IAuth } from '../interfaces/IAuth';
 import { CreateUserDto } from '../../user/dto/CreateUserDto';
 import { TokenService } from './token.service';
-import { IRefreshToken } from '../interfaces/IRefreshToken';
 import { IUserResponse } from 'src/modules/user/interfaces/IUserResponse';
+import { RefreshTokenDto } from '../dto/RefreshTokenDto';
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -14,7 +15,7 @@ export class AuthService {
 
   async login(user: IUserResponse): Promise<IAuth> {
     const tokens = await this.tokenService.generateTokens(user);
-
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     return { ...tokens, user };
   }
 
@@ -33,7 +34,7 @@ export class AuthService {
     return tokens;
   }
 
-  async revokeToken(refreshTokenId: string): Promise<IRefreshToken> {
+  async revokeToken(refreshTokenId: string): Promise<RefreshTokenDto> {
     const validToken = await this.tokenService.validateRefreshToken(refreshTokenId);
     await this.tokenService.deleteToken(validToken.id);
     return {

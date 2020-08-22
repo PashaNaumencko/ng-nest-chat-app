@@ -4,7 +4,7 @@ import { AuthService } from "../services/auth.service";
 import { Request } from "express";
 import { IAuth } from "../interfaces/IAuth";
 import { CreateUserDto } from "../.././user/dto/CreateUserDto";
-import { IRefreshToken } from "../interfaces/IRefreshToken";
+import { RefreshTokenDto } from '../dto/RefreshTokenDto';
 
 @Controller('auth')
 export class AuthController {
@@ -23,12 +23,12 @@ export class AuthController {
   }
 
   @Post('tokens')
-  async refreshTokens(@Body() body: IRefreshToken): Promise<IAuth> {
+  async refreshTokens(@Body() body: RefreshTokenDto): Promise<IAuth> {
     return await this.authService.refreshTokens(body.refreshToken);
   }
 
   @Post('tokens/revoke')
-  async revokeToken(@Body() body: IRefreshToken): Promise<IRefreshToken> {
+  async revokeToken(@Body() body: RefreshTokenDto): Promise<RefreshTokenDto> {
     return await this.authService.revokeToken(body.refreshToken);
   }
 }

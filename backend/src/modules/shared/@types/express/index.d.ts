@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IUser } from "../../../user/interfaces/IUser";
 import { CreateUserDto } from "../../../user/dto/CreateUserDto";
+import { IUserResponse } from "src/modules/user/interfaces/IUserResponse";
 
 declare global {
   namespace Express {
-    interface User extends IUser, CreateUserDto { }
+    interface User extends IUserResponse, CreateUserDto { }
 
     interface Request {
       user?: User;

@@ -26,7 +26,7 @@ export class TokenService {
 
   private async generateRefreshToken(user: IUserResponse): Promise<string> {
     const currentDate = new Date();
-    const expiresAt = currentDate.setDate(currentDate.getMinutes() + 1);
+    const expiresAt = currentDate.setDate(currentDate.getMinutes() + 3);
     const { id } = await this.refreshTokenRepository.addToken({
       user,
       expiresAt

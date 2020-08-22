@@ -3,7 +3,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UserService } from '../../user/services/user.service';
 import { CryptoHelper } from '../../shared/helpers/crypto.helper';
-import { IUser } from '../../user/interfaces/IUser';
+import { IUserResponse } from '../../user/interfaces/IUserResponse';
 
 @Injectable()
 export class LoginStrategy extends PassportStrategy(Strategy, 'login') {
@@ -14,7 +14,7 @@ export class LoginStrategy extends PassportStrategy(Strategy, 'login') {
     super();
   }
 
-  async validate(username: string, password: string): Promise<IUser> {
+  async validate(username: string, password: string): Promise<IUserResponse> {
     const user = await this.userService.getByUsername(username);
     if(!user) {
       throw new UnauthorizedException('The username/password combination is invalid');
@@ -25,6 +25,9 @@ export class LoginStrategy extends PassportStrategy(Strategy, 'login') {
       throw new UnauthorizedException(`Passwords don't match`);
     }
 
-    return user;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password: passwordHash, ...authorizedUser } = user;
+
+    return authorizedUser;
   }
 }

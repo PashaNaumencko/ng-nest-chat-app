@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { faCommentDots, faUser, faCheckCircle, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
@@ -11,7 +11,7 @@ import { takeUntil } from 'rxjs/operators';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnDestroy {
 
   faCommentDots = faCommentDots;
   faUser = faUser;
@@ -30,10 +30,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private router: Router
   ) { }
-
-  ngOnInit(): void {
-
-  }
 
   onLogin(): void {
     this.loading = true;
