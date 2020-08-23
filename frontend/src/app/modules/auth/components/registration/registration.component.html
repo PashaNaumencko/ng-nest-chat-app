@@ -28,6 +28,10 @@
               class="field__icon field__icon--success"
               *ngIf="registerForm.controls['username'].valid && registerForm.controls['username'].touched"
             ></fa-icon>
+            <div
+              class="loader loader--input"
+              *ngIf="registerForm.controls['username'].pending"
+            ></div>
             </div>
           <div
             class="field__error-text"
@@ -36,6 +40,7 @@
             <span *ngIf="registerForm.controls['username'].errors.required">Required</span>
             <span *ngIf="registerForm.controls['username'].errors.minlength">Username value is too short</span>
             <span *ngIf="registerForm.controls['username'].errors.maxlength">Username value is too long</span>
+            <span *ngIf="registerForm.controls['username'].errors.usernameAlreadyTaken">This username is already taken</span>
           </div>
         </div>
         <div class="field">
@@ -63,13 +68,18 @@
               class="field__icon field__icon--success"
               *ngIf="registerForm.controls['email'].valid && registerForm.controls['email'].touched"
             ></fa-icon>
-            </div>
+            <div
+              class="loader loader--input"
+              *ngIf="registerForm.controls['email'].pending"
+            ></div>
+          </div>
           <div
             class="field__error-text"
             *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched"
           >
             <span *ngIf="registerForm.controls['email'].errors.required">Required</span>
             <span *ngIf="registerForm.controls['email'].errors.pattern">Incorrect email</span>
+            <span *ngIf="registerForm.controls['email'].errors.emailAlreadyTaken">This email is already taken</span>
           </div>
         </div>
 
@@ -139,8 +149,20 @@
             <span *ngIf="registerForm.controls['passwordConfirm'].errors.mustMatch">Passwords don't match</span>
           </div>
         </div>
-        <button type="submit" class="btn btn--primary btn--full-width mb-20" [disabled]="!registerForm.valid || loading">
-          <fa-icon [icon]="faUser" class="btn__icon"></fa-icon>
+        <div class="banner banner--error mb-20" *ngIf="registerError">
+          <div class="banner__icon">
+            <fa-icon
+              [icon]="faExclamationCircle"
+              class="banner__icon--error"
+            ></fa-icon>
+          </div>
+          <div class="banner__message">
+            {{ registerError }}
+          </div>
+        </div>
+        <button type="submit" class="btn btn--primary btn--full-width mb-20" [disabled]="!registerForm.valid">
+          <fa-icon [icon]="faUser" class="btn__icon" *ngIf="!loading"></fa-icon>
+          <div class="loader loader--button" *ngIf="loading"></div>
           Sign Up
         </button>
         <div class="signup__signup-link">

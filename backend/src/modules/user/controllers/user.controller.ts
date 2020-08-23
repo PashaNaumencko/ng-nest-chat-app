@@ -1,8 +1,9 @@
-import { Controller, UseGuards, Get, Req } from "@nestjs/common";
+import { Controller, UseGuards, Get, Req, Param } from "@nestjs/common";
 import { Request } from 'express';
 import { UserService } from "../services/user.service";
 import { IUserResponse } from "../interfaces/IUserResponse";
 import { JwtAuthGuard } from '../../auth/guards/jwt.guard'
+import { IValidateResponse } from "../interfaces/IValidateResponse";
 
 @Controller('user')
 export class UserController {
@@ -18,5 +19,15 @@ export class UserController {
   @Get('profile')
   profile(): string {
     return "profile";
+  }
+
+  @Get('/check-username/:username')
+  checkUsername(@Param('username') username: string): Promise<IValidateResponse> {
+    return this.userService.isUsernameAlreadyTaken(username);
+  }
+
+  @Get('/check-email/:email')
+  checkEmail(@Param('email') email: string): Promise<IValidateResponse> {
+    return this.userService.isEmailAlreadyTaken(email);
   }
 }

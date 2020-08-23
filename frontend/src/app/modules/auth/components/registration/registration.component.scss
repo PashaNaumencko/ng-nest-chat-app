@@ -1,6 +1,11 @@
 @import "variables";
 
+.container {
+  justify-content: flex-start;
+}
+
 .signup {
+  padding: 30px 0;
   display: flex;
   justify-content: center;
   align-items: center;

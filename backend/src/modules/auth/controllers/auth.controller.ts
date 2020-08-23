@@ -12,23 +12,23 @@ export class AuthController {
 
   @UseGuards(AuthGuard('login'))
   @Post('login')
-  async login(@Req() req: Request): Promise<IAuth> {
-    return await this.authService.login(req.user);
+  login(@Req() req: Request): Promise<IAuth> {
+    return this.authService.login(req.user);
   }
 
   @UseGuards(AuthGuard('register'))
   @Post('register')
-  async register(@Body() body: CreateUserDto): Promise<IAuth> {
-    return await this.authService.register(body);
+  register(@Body() body: CreateUserDto): Promise<IAuth> {
+    return this.authService.register(body);
   }
 
   @Post('tokens')
-  async refreshTokens(@Body() body: RefreshTokenDto): Promise<IAuth> {
-    return await this.authService.refreshTokens(body.refreshToken);
+  refreshTokens(@Body() body: RefreshTokenDto): Promise<IAuth> {
+    return this.authService.refreshTokens(body.refreshToken);
   }
 
   @Post('tokens/revoke')
-  async revokeToken(@Body() body: RefreshTokenDto): Promise<RefreshTokenDto> {
-    return await this.authService.revokeToken(body.refreshToken);
+  revokeToken(@Body() body: RefreshTokenDto): Promise<RefreshTokenDto> {
+    return this.authService.revokeToken(body.refreshToken);
   }
 }

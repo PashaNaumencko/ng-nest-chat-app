@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { faCommentDots, faUser, faCheckCircle, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/services/auth.service';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +24,9 @@ export class LoginComponent implements OnDestroy {
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
   });
+
   loading = false;
+  loginError = '';
 
   constructor(
     private authService: AuthService,
@@ -32,15 +34,19 @@ export class LoginComponent implements OnDestroy {
   ) { }
 
   onLogin(): void {
+    if (this.loading) {
+      return;
+    }
+
     this.loading = true;
     this.authService.login(this.loginForm.value)
-      .pipe(takeUntil(this.unsubscribe$))
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        finalize(() => this.loading = false)
+      )
       .subscribe(
-        () => {
-          this.router.navigate(['/']);
-          this.loading = false;
-        },
-        (error) => console.error(error)
+        () => this.router.navigate(['/']),
+        (error) => this.loginError = error.message
       );
   }
 
