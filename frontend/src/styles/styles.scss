@@ -143,6 +143,9 @@ textarea {
     color: #ff1414;
     font-size: 0.9rem;
     padding: 7px 0;
+    width: 50%;
+    display: inline-block;
+    line-height: 1.3;
   }
   &__icon {
     position: absolute;
