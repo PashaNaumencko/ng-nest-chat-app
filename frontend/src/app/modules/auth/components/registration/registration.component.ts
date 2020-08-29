@@ -70,7 +70,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       ]],
       passwordConfirm: ['', Validators.required]
     }, {
-      validator: MustMatch('password', 'passwordConfirm'),
+      validators: [MustMatch('password', 'passwordConfirm')],
       updateOn: 'change'
     });
   }

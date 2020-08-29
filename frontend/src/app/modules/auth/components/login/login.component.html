@@ -77,23 +77,24 @@
           </label>
           <a class="login__reset-link" routerLink="/auth/reset-password">Forgot password</a>
         </div>
-        <div class="banner banner--error mb-20" *ngIf="loginError">
-          <div class="banner__icon">
-            <fa-icon
-              [icon]="faExclamationCircle"
-              class="banner__icon--error"
-            ></fa-icon>
-          </div>
-          <div class="banner__message">
-            {{ loginError }}
-          </div>
-        </div>
+        <app-alert
+          class="mb-20"
+          *ngIf="loginError"
+          [error]="true"
+          [alertText]="loginError"
+        ></app-alert>
 
-        <button type="submit" class="btn btn--primary btn--full-width mb-20" [disabled]="!loginForm.valid">
-          <fa-icon [icon]="faUser" class="btn__icon" *ngIf="!loading"></fa-icon>
-          <div class="loader loader--button" *ngIf="loading"></div>
+        <app-button
+          type="submit"
+          [isPrimary]="true"
+          [fullWidth]="true"
+          class="mb-20"
+          [disabled]="!loginForm.valid"
+          [loading]="loading"
+          [icon]="faUser"
+        >
           Login
-        </button>
+        </app-button>
         <div class="login__signup-link">
           Don't have an account yet?
           <a routerLink="/auth/register">Signup Now</a>

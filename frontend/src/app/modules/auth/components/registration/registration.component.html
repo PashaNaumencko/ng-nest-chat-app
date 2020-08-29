@@ -28,10 +28,10 @@
               class="field__icon field__icon--success"
               *ngIf="registerForm.controls['username'].valid && registerForm.controls['username'].touched"
             ></fa-icon>
-            <div
-              class="loader loader--input"
+            <app-loader
+              [forInput]="true"
               *ngIf="registerForm.controls['username'].pending"
-            ></div>
+            ></app-loader>
             </div>
           <div
             class="field__error-text"
@@ -68,10 +68,11 @@
               class="field__icon field__icon--success"
               *ngIf="registerForm.controls['email'].valid && registerForm.controls['email'].touched"
             ></fa-icon>
-            <div
-              class="loader loader--input"
+            <app-loader
+              [forInput]="true"
               *ngIf="registerForm.controls['email'].pending"
-            ></div>
+            >
+            </app-loader>
           </div>
           <div
             class="field__error-text"
@@ -149,22 +150,23 @@
             <span *ngIf="registerForm.controls['passwordConfirm'].errors.mustMatch">Passwords don't match</span>
           </div>
         </div>
-        <div class="banner banner--error mb-20" *ngIf="registerError">
-          <div class="banner__icon">
-            <fa-icon
-              [icon]="faExclamationCircle"
-              class="banner__icon--error"
-            ></fa-icon>
-          </div>
-          <div class="banner__message">
-            {{ registerError }}
-          </div>
-        </div>
-        <button type="submit" class="btn btn--primary btn--full-width mb-20" [disabled]="!registerForm.valid">
-          <fa-icon [icon]="faUser" class="btn__icon" *ngIf="!loading"></fa-icon>
-          <div class="loader loader--button" *ngIf="loading"></div>
-          Sign Up
-        </button>
+        <app-alert
+          class="mb-20"
+          *ngIf="registerError"
+          [error]="true"
+          [alertText]="registerError"
+        ></app-alert>
+        <app-button
+          type="submit"
+          [isPrimary]="true"
+          [fullWidth]="true"
+          class="mb-20"
+          [disabled]="!registerForm.valid"
+          [loading]="loading"
+          [icon]="faUser"
+        >
+          Sign up
+        </app-button>
         <div class="signup__signup-link">
           Already have an account?
           <a routerLink="/auth/login">Signin Now</a>

@@ -1,0 +1,49 @@
+@import './variables';
+
+:host {
+  display: contents;
+}
+
+.btn {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 15px 20px;
+  min-width: 225px;
+  font-family: $medium-font;
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1;
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  &--full-width {
+    width: 100%;
+  }
+  &--primary {
+    background-color: $primary-green;
+    color: #ffffff;
+  }
+
+  &__icon {
+    vertical-align: middle;
+    color: #ffffff;
+    margin-right: 0.3rem;
+    font-size: 0.9rem;
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.1em #4A90E2;
+  }
+
+  &[disabled] {
+    background: #b3b2b3;
+  }
+}

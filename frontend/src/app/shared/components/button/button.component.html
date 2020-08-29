@@ -1,0 +1,11 @@
+<button
+  [type]="type"
+  class="btn"
+  [class.btn--full-width]="fullWidth"
+  [class.btn--primary]="isPrimary"
+  [disabled]="disabled"
+>
+  <fa-icon [icon]="icon" class="btn__icon" *ngIf="!loading"></fa-icon>
+  <app-loader [forButton]="true" *ngIf="loading"></app-loader>
+  <ng-content></ng-content>
+</button>

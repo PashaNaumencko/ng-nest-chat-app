@@ -1,0 +1,21 @@
+<div
+  class="alert"
+  [class.alert--error]="error"
+  [class.alert--success]="success"
+>
+  <div class="alert__icon">
+    <fa-icon
+      [icon]="faExclamationCircle"
+      class="alert__icon--error"
+      *ngIf="error"
+    ></fa-icon>
+    <fa-icon
+    [icon]="faCheckCircle"
+    class="alert__icon--success"
+    *ngIf="success"
+  ></fa-icon>
+  </div>
+  <div class="alert__message">
+    {{ alertText }}
+  </div>
+</div>
