@@ -4,7 +4,13 @@
       <fa-icon [icon]="faCommentDots" class="signup__icon"></fa-icon>
       <h3>Sign in</h3>
       <div class="signup__subheader">Welcome to ChatApp! Please create a new account.</div>
-        <div class="field">
+      <app-input
+        [formGroup]="registerForm"
+        [required]="true"
+        label="Username"
+        name="username"
+      ></app-input>
+        <!-- <div class="field">
           <label class="field__label">
             Username
             <span>*</span>
@@ -42,7 +48,7 @@
             <span *ngIf="registerForm.controls['username'].errors.maxlength">Username value is too long</span>
             <span *ngIf="registerForm.controls['username'].errors.usernameAlreadyTaken">This username is already taken</span>
           </div>
-        </div>
+        </div> -->
         <div class="field">
           <label class="field__label">
             Email

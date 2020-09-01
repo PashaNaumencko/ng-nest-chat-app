@@ -1,0 +1,24 @@
+<div class="chat-list">
+  <div class="header space-between">
+    <div class="header__user">
+      <div class="header__user-photo">
+        <img src="https://lh3.googleusercontent.com/proxy/4iOfzEqJQZUxQg4ZoOeuIBOZ99H12f79zgqnpN5VPopqp-H3-wlUstagYt9qWX0AQn0w6ff1baKOmxTZE7fL2Md8-Tw" alt="avatar">
+      </div>
+      <div class="header__user-info">
+        <div class="header__user-fullname">Ryan Smith</div>
+        <div class="header__user-status">Happy life</div>
+      </div>
+    </div>
+    <div class="header__settings">
+      <div class="dots-button" (click)="onMenuClick()">
+        <figure></figure>
+        <figure class="dots-button__middle" [class.active]="isMenuActive"></figure>
+        <p class="dots-button__close" [class.active]="isMenuActive">x</p>
+        <figure></figure>
+        <ul class="menu" [class.active]="isMenuActive">
+          <li class="menu__item">Logout</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

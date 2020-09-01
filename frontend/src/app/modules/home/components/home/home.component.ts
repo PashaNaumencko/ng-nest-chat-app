@@ -2,16 +2,16 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { AuthService } from 'src/app/services/auth.service';
-import { UserDTO } from 'src/app/modules/auth/models/UserDTO';
+import { AuthService } from '../../../../services/auth.service';
+import { UserDTO } from '../../../auth/models/UserDTO';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-chat-list',
-  templateUrl: './chat-list.component.html',
-  styleUrls: ['./chat-list.component.scss']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
-export class ChatListComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit, OnDestroy {
   faSignOutAlt = faSignOutAlt;
 
   authorizedUser: UserDTO;

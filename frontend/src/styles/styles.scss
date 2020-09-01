@@ -29,6 +29,11 @@ body {
   height: 100vh;
 }
 
+.img-responsive {
+  max-width: 100%;
+  height: auto;
+}
+
 h3 {
   font-family: $bold-font;
 }
@@ -131,7 +136,7 @@ textarea {
   }
 
   &__input {
-    padding: 10px 15px;
+    padding: 10px 35px 10px 15px;
     position: relative;
     color: #555557;
     font-size: 1.15rem;

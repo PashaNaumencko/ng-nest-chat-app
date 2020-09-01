@@ -1,0 +1,115 @@
+@import './variables';
+
+:host {
+  width: 22%;
+}
+
+.chat-list {
+  background-color: $primary-green;
+  border-right: 1px solid #cccccc;
+  height: 100%;
+}
+
+.header {
+  width: 100%;
+  padding: 10px;
+  &__user {
+    display: flex;
+    &-photo {
+      width: 50px;
+      height: 50px;
+      margin-right: 15px;
+      border-radius: 3px;
+      img {
+        border-radius: 3px;
+      }
+    }
+    &-info {
+      display: flex;
+      flex-direction: column;
+      padding-top: 3px;
+      color: #ffffff;
+    }
+    &-fullname {
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+      letter-spacing: 0.03rem;
+    }
+    &-status {
+      font-size: 0.85rem;
+      letter-spacing: 0.03rem;
+    }
+  }
+  &__settings {
+
+  }
+}
+
+.dots-button {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  padding: 0 16px;
+  top: 12px;
+  figure {
+    width: 6px;
+    height: 6px;
+    border-radius: 5px;
+    background: #ffffff;
+    margin: 3px 0;
+  }
+  &__middle {
+    transition: all 0.25s cubic-bezier(.72,1.2,.71,.72);
+    transform: scale(1);
+    position: relative;
+    box-shadow: 0 0.1px 0.1px 0 rgba(0, 0, 0, 0.16), 0 0.1px 0.3px 0 rgba(0, 0, 0, 0.12);
+    -webkit-filter: blur(.1px);
+    filter: blur(.1px);
+    &.active {
+      transform: scale(4.5);
+      transition: all 0.25s cubic-bezier(.32,2.04,.85,.54);
+      box-shadow: 0 0.1px 0.1px 0 rgba(0, 0, 0, 0.16), 0 0.1px 0.3px 0 rgba(0, 0, 0, 0.12);
+    }
+  }
+  &__close {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    margin-top: -1px;
+    color: white;
+    transition: all 0.2s cubic-bezier(.72,1.2,.71,.72);
+    font-size: 22px;
+    user-select: none;
+    &.active {
+      transform: translate(-50%, -50%) scale(1);
+      transition: all 0.15s cubic-bezier(.32,2.04,.85,.54);
+      color: $primary-green;
+    }
+  }
+}
+
+.menu {
+  position: absolute;
+  right: 0;
+  top: 2.5em;
+  width: 100px;
+  transition: all 0.25s ease-out;
+  transform: scale(0);
+  transform-origin: 100% 0;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 8px 0 rgba(0, 0, 0, 0.12);
+  background-color: #ffffff;
+  &.active {
+    transform: scale(1);
+    transition: all 0.25s cubic-bezier(.5,1.8,.9,.8);
+  }
+  &__item {
+    display: block;
+    width: 100%;
+    padding: 16px 18px;
+    text-align: center;
+    &:hover {
+      background: #adeadb;
+    }
+  }
+}

@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
 import { HomeRoutingModule } from './home-routing.module';
 import { CommonModule } from '@angular/common';
-import { ChatListComponent } from './components/chat-list/chat-list.component';
+import { HomeComponent } from './components/home/home.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ChatListModule } from '../chat-list/chat-list.module';
 
 @NgModule({
   declarations: [
-    ChatListComponent
+    HomeComponent
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
-    SharedModule
+    SharedModule,
+    ChatListModule
   ]
 })
 export class HomeModule { }

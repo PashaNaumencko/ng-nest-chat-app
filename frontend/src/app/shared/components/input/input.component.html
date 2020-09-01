@@ -1,0 +1,45 @@
+<div class="field">
+  <label class="field__label" *ngIf="label">
+    {{ label }}
+    <span *ngIf="required">*</span>
+  </label>
+  <div class="field__input-wr">
+    <input
+      [type]="type"
+      [placeholder]="placeholder"
+      class="
+      field__input
+      field__input--border"
+      [formControlName]="name"
+      [class.field__input--error]="formGroup[name].invalid && formGroup[name].touched"
+    >
+    <fa-icon
+      [icon]="faExclamationCircle"
+      class="field__icon field__icon--error"
+      *ngIf="formGroup[name].invalid && formGroup[name].touched"
+    ></fa-icon>
+    <fa-icon
+      [icon]="faCheckCircle"
+      class="field__icon field__icon--success"
+      *ngIf="formGroup[name].valid && formGroup[name].touched"
+    ></fa-icon>
+    <app-loader
+      [forInput]="true"
+      *ngIf="formGroup[name].pending"
+    ></app-loader>
+    </div>
+  <div
+    class="field__error-text"
+    *ngIf="formGroup[name].invalid && formGroup[name].touched"
+  >
+    <span
+      *ngFor="let error of formGroup[name].errors"
+    >
+      {{ error }}
+    </span>
+    <!-- <span *ngIf="formControl.errors.required">Required</span>
+    <span *ngIf="formControl.errors.minlength">Username value is too short</span>
+    <span *ngIf="formControl.errors.maxlength">Username value is too long</span>
+    <span *ngIf="formControl.errors.usernameAlreadyTaken">This username is already taken</span> -->
+  </div>
+</div>

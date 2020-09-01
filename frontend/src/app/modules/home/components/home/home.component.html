@@ -1,0 +1,10 @@
+<div class="app-wrapper">
+  <app-chat-list></app-chat-list>
+  <div class="chat">
+    <p>{{ getUser() }}</p>
+    <button class="btn btn--primary mb-20" (click)="onLogout()">
+      <fa-icon [icon]="faSignOutAlt" class="btn__icon"></fa-icon>
+      Logout
+    </button>
+  </div>
+</div>
